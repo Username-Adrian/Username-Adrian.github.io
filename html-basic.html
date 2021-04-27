@@ -8,13 +8,14 @@
 <body>
   <h1>lorem</h1>
   <h2>Lorem,ipsum.</h2>
-  <strong>lorem,ipsum dolor.</strong>
+  <h3>Lorem,ipsum dolor.</h3>
 
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum explicabo dolorum laboriosam hic eos! Veniam commodi quos modi fugiat repudiandae aut expedita, magnam placeat voluptate, asperiores, non praesentium vel pariatur.</p>
-
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis, porro odit cupiditate facilis quo, corporis harum blanditiis perferendis quia recusandae ab tenetur molestiae perspiciatis reiciendis adipisci! Ducimus molestiae aut similique?</p>
+  
   <div>
     <a href="https://www.jd.com/" target="_blank">在新窗口打开京东</a>
-    <a href="mailto:1073890484@qq.com">点我发送邮件</a>
+    <a href="mailto:1073890484@qq.com" target="_blank">点我发送邮件</a>
     <a href="#bottom">跳到页面底部</a>
     <a href="./stock-photo-229389427.jpg" download='一串葡萄'>点击我下载文件。</a>
   </div>
@@ -27,8 +28,9 @@
   <strong>有什么区别呢？</strong>
   <u>这个呢？</u>
   <em>这个呢？</em>
-  
+  <br>
   &lt;&excl;&hyphen;&hyphen;&nbsp;这段注释需要出现在页面里面&nbsp;&hyphen;&hyphen;&gt;
+  
   <p>HTML的注释怎么写？</p>
   <p>下面是一段JavaScript代码，最适合用何种标签表示呢？</p>
   <pre>
@@ -87,8 +89,8 @@
     <dl>
       <dt>性別</dt>
       <dd>
-        <input type="radio" name="gender">男
-        <input type="radio" name="gender">女
+        <label for=""><input type="radio" name="gender">男</label>
+        <label for=""><input type="radio" name="gender">女</label>
       </dd>
     </dl>
     
@@ -113,6 +115,13 @@
       </dd>
     </dl>
     
+    <dl>
+      <dt>生日</dt>
+      <dd>
+        <input type="date" name="" id="">
+      </dd>
+    </dl>
+
     <dl>
       <dt>生辰</dt>
       <dd>
@@ -148,29 +157,58 @@
 
   <fieldset disabled>
     <legend>这里面的全部禁用了</legend>
-    <input type="text"><input type="text"><input type="text"><input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="text">
+    <input type="text">
   </fieldset>
   <input type="submit" value="提交">
   <input type="reset" value="重置">
 
   <hr>
 
-  <dl>
-    <dt>
-      编号
-      <dd>aaa</dd>
-      <dd>aaa</dd>
-      <dd>aaa</dd>
-      <dd>aaa</dd>
-    </dt>
-    
+  <table border="1">
+    <colgroup>
+      <col bgcolor='yellow'>
+      <col bgcolor='red'>
+      <col bgcolor='green'>
+      <col bgcolor='blue'>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>编码</th>
+        <th>品名</th>
+        <th>进价</th>
+        <th>出价</th>
+      </tr>
+    </thead>
 
-    <dt>品名</dt>
-    <dt>进价</dt>
-    <dt>出价</dt>
-
-    
-  </dl>
+    <tbody>
+      <tr>
+        <td>aaa</td>
+        <td>aaa</td>
+        <td rowspan='2'>5</td>
+        <td>aaa</td>
+      </tr>
+      <tr>
+        <td>aaa</td>
+        <td>aaa</td>
+        <td>8</td>
+      </tr>
+      <tr>
+        <td>aaa</td>
+        <td>aaa</td>
+        <td>aaa</td>
+        <td>aaa</td>
+      </tr>
+      <tr>
+        <td>aaa</td>
+        <td>aaa</td>
+        <td>aaa</td>
+        <td>aaa</td>
+      </tr>
+    </tbody>
+  </table>
 
   <hr>
 
@@ -178,7 +216,14 @@
 
   <hr>
 
-  <a href="https://www.mi.com/">小米</a>
+  <a href="https://www.mi.com/" target="frame">小米</a>
+  <br>
+  
+  <iframe name='frame' src="https://nodejs.org/en/" frameborder="2">
+  </iframe>
+
+  <p>aaa&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bbbbb</p>
+  <pre>aaa        bbbb</pre>
 
   &gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&gt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&nbsp;&lt;span&gt;&lt;&sol;span&gt;
   <span id="bottom"></span>
