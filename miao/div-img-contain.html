@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    section {
+      width: 300px;
+      height: 300px;
+      border: 19px solid black;
+      
+    }
+    img {
+      display: block;
+      border: 14px solid red;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    .s1 img {
+      /* 
+      https://www.zhangxinxu.com/wordpress/2015/03/css3-object-position-object-fit/
+      为什么要让 img 设置宽高，才能让contain属性值表现出居中的特性？ 而让 img 的父元素设置宽高则无用？
+      */
+      width:300px; 
+      height:300px;
+      object-fit: contain;
+
+    }
+
+    .s2 {
+      position: relative;
+    }
+    .s2 > img {
+      position: absolute;
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      margin: auto;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .s3 {
+      background: url(https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3175169126,2847745318&fm=26&gp=0.jpg) center center no-repeat;
+      display: block;
+      
+    }
+  </style>
+</head>
+
+<body>
+  <section class="s1">
+    <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1226751037,2050948510&fm=26&gp=0.jpg" alt="">
+  </section>
+  <section class="s2">
+    <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1802269427,2156201960&fm=26&gp=0.jpg" alt="">
+  </section>
+  <section class="s3">
+    
+  </section>
+</body>
+</html>
