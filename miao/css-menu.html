@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    body, html {
+      margin: 0;
+    }
+
+    * {
+      /* 让不对齐的ul对齐。因为vertical默认baseline对齐。 */
+      vertical-align: middle;
+    }
+
+    div {
+      margin: auto;
+      margin-top: 40px;
+      width: 400px;
+      background-color: #aa9987;
+      border-radius: 10px;
+    }
+
+    div, div > span {
+      border: 1px solid black;
+      text-align: center;
+      
+    }
+    span {
+      width: 10vh;
+      height: 23px;
+      display: inline-block;
+      margin: 0;
+      background-color: #b6f3f8;
+    }
+
+    .item-g {
+      position: relative;
+    }
+    .son {
+      position: absolute;
+      left: 115px;
+      top: -6px
+    }
+    li {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      margin: 0 auto;
+    }
+
+    ul {
+      padding: 0px;
+      width: 100px;
+      visibility: hidden;
+      background-color: rgb(203, 236, 16);
+      margin-top: 4px;
+      /* 有空隙需要用margin-top减少空隙，防止选不中 */
+
+      margin-left: -17px;
+      list-style: none;
+    }
+
+    .son {
+      visibility: hidden;
+    }
+
+    .a:hover .items  {
+      visibility: visible;
+    }
+    .item-g:hover .son {
+      visibility: visible;
+    }
+
+    span:hover, li:hover {
+      background-color: red;
+    }
+
+    
+
+  </style>
+</head>
+<body>
+  <div>
+    <span class="a">a
+      <ul class='items'>
+        <li class="item-g">
+          generation
+          <ul class='son'>
+            <li>a11</li>
+            <li>a11</li>
+            <li>a11</li>
+            <li>a11</li>
+          </ul>
+        </li>
+        <li>a2</li>
+        <li>a3</li>
+        <li>a4</li>
+      </ul>
+    </span><!-- 
+    --><span class="a">b
+      <ul class='items'>
+        <li>b1</li>
+        <li>b2</li>
+        <li>b3</li>
+        <li>b4</li>
+      </ul>
+    </span><!-- 
+    --><span class="a">c
+      <ul class='items'>
+        <li>c1</li>
+        <li>c2</li>
+        <li>c3</li>
+        <li>c4</li>
+      </ul>
+    </span><!-- 
+    --><span class="a">d
+      <ul class='items'>
+        <li>d1</li>
+        <li>d2</li>
+        <li>d3</li>
+        <li>d4</li>
+      </ul>
+    </span>
+    
+  </div>
+</body>
+</html>

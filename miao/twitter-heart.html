@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    div {
+      width: 450px;
+
+    }
+
+    .a {
+      display: inline-block;
+      width: 100px;
+      height: 100px;
+      border: 2px solid red;
+
+      background-image: url(./web_heart_animation.png);
+      background-repeat: no-repeat;
+    }
+
+    .a:hover {
+
+      transition: background-position 1s steps(28) ;
+      background-position: -2800px, 0px;
+      
+    } 
+
+  </style>
+</head>
+<body>
+  <div>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+    <span class="a"></span>
+
+  </div>
+</body>
+</html>
