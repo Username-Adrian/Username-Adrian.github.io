@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /*
+    木有解决的问题：
+    1.在从左到右点击的时候边框宽度变宽
+    2.在从左到右球的点击过快的时候，球会胖出右边的边界。
+     */
+    /* 让 html和body的外边距和内边距消失 */
+    body, html {
+      margin: 0;
+      padding: 0;
+    }
+
+    /* 让 CheckBox的样式消失。 */
+    #slide {
+      display: none;
+    }
+
+    /* 设置背景色是绿色的操场圆 */
+    .outer-circle {
+      box-sizing: border-box;
+      position:  relative;
+      display: block;
+      width: 270px;
+      height: 140px;
+      border: 3px solid #c8d1c8e8;
+      background-color: rgb(48, 243, 75, 0.2);
+      border-radius: 75px;
+      transition: background 0.3s, background-color 0.8s;
+    }
+    /* 让背景色是绿色的操场圆颜色渐变。 */
+    input:checked + label {
+      /* 在绿色操场圆这个父元素和圆为定位关系时，这里父元素的边框宽度增加会导致圆的位置向下偏移，导致边框变宽的宽度效果在绿色操场圆上面难以做到，而在白色操场圆上面设置边框时，会导致按钮回去的过程中，边框存在。*/
+      border-color: transparent;
+      background-color: rgb(48, 243, 75);
+      transition: background-color 0.8s, border 0.3s;
+    }
+
+    /* 
+    设置圆的样式：
+    相对于父元素定位。
+    设置圆的相对定位，让圆固定在操场上所要求的的位置。
+    设置圆的背景色以及阴影。
+    设置圆在右到左的路径上面：圆的两端开始变大，且左边变大的幅度大于右边。
+     */
+    .inner-circle {
+      z-index: 1;
+      position: absolute;
+      width: 120px; 
+      height: 120px; 
+      top: 6px;
+      left: 7px;
+      border: 1px solid white;
+      padding: 0;
+      /* padding-left: 0px; */
+      border-radius: 75px;
+      background-color: #fff;
+      box-shadow: 0px 0px 22px #c8d1c8e8;
+      transition: left 0.6s ease-in-out, padding-left 0.5s, width 0.2s ease-in-out;
+    }
+    /* 
+    设置圆在被点击后的变化： 
+    圆向右移动，圆的两端开始变大，且右边变大的幅度大于左边。
+    */
+    input:checked + label > label:first-child {
+      left: 134px;
+      padding-left: 40px;
+      width: 80px;
+      box-shadow: 0px 0px 22px red;
+      transition: left 0.6s ease-in-out, padding-left 0.2s ease-in-out, width 0.5s ease-in-out, box-shadow 0.6s;
+    }
+
+    /* 
+    设置用来覆盖背景色是绿色操场圆的白色的操场圆。
+    设置白色操场圆在白圆从左到右时的变化：
+    内径变小、背景色由淡色变深。
+     */
+    .white-bg {
+      /* box-sizing: border-box;在绿色操场圆设置为border-box的时候，这里没必要设置这个。 */
+      /* display: block; */
+      background-color: white;
+      position: absolute;
+      top: 0px;
+      right: 0px;
+      bottom: 0px;
+      left: 0px;
+      margin: auto;
+      /* 宽高需要减去两倍的单边框厚度 */
+      width: 264px;
+      height: 134px;
+      border-radius: 75px;
+      transition: width 0.6s, height 0.6s, border 0.1s;
+    }
+    /* 
+    当白色的操场圆被点击时：
+    边框的厚度变大持续一段时间、边框的颜色变绿持续一段时间后操场圆缩小
+     */
+    input:checked + label > label:nth-child(2) {
+      width: 0px;
+      height: 0px;
+      /* background-color: rgb(48, 243, 75); */
+      transition: width 0.5s 0.1s, height 0.5s 0.1s; 
+    }
+
+  </style>
+</head>
+<body>
+  
+  <input type="checkbox" name="" id="slide"> 
+  <label class="outer-circle">
+    <label class="inner-circle" for="slide"></label>
+    <label class='white-bg' for="slide"></label> 
+  </label>
+  
+  
+  
+</body>
+</html>
