@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    /* 
+    现象：点击时，左边和上边有格子的格子被点击时，该格子的左边和上边的颜色显示该格子左边和上边的格子的颜色。
+    第一种方法：利用表的边框合并的一个规则：
+    合并边框的样式和宽度相同时，按照cell、row、row group、column、column group、table的顺序显示颜色。所以通过指定优先级较低的column和row第一层边框色，再通过指定优先级高的td的第二层颜色来达到鼠标悬浮时，四周的边框变色。
+     */
+    .method-1 {
+      border-collapse: collapse;
+    }
+
+    .method-1 td {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+    }
+    .method-1 col {
+      border: 5px solid blue;
+    }
+    .method-1 tr {
+      border: 5px solid blue;
+    }
+    .method-1 td:hover {
+      border: 5px solid red;
+    }
+
+    /* 
+    方法二：先给行元素设置边框属性，然后给每一个 td 元素设置左边框。
+     */
+    .method-2 {
+      border-collapse: collapse;
+    }
+    .method-2 tr{
+      border: 5px solid blue;
+    }
+    .method-2 td {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      border-left: 5px solid blue;
+    }
+    .method-2 td:hover {
+      border: 5px solid red;
+    }
+
+    /* 
+    第三种方法方法：使用列表来创建九宫格
+    遇到的问题：当鼠标悬浮在该元素上面的时候，元素边框被后一个元素边框所挡住。所以使用 z-index 的属性让被悬浮的元素一直在最上层（添加定位relative属性值）。     
+    */
+    .method-3 {
+      width: 170px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      padding-bottom: 5px;
+    }
+    li {
+      float: left; /*可以让有空格（由于li元素有空格导致）相隔的格子紧贴着。*/
+      width: 50px;
+      height: 50px;    
+      border: 5px solid blue;
+      margin: 0 -5px -5px 0;
+      text-align: center;
+      line-height: 50px;
+      position: relative;
+      
+    }
+    li:hover {
+      border: 5px solid red;
+      z-index:1;
+    }
+
+    /* 第四种方法：
+    使用伪元素，在鼠标悬浮到相关元素的时候，创建伪元素的边框来替代原来的边框。
+     */
+    .method-4 {
+      border-collapse: collapse;
+    }
+    .method-4 tr{
+      border: 5px solid blue;
+    }
+    .method-4 td {
+      width: 50px;
+      height: 50px;
+      text-align: center;
+      border-left: 5px solid blue;
+      position: relative;
+    }
+    .method-4 td:hover::before {
+      position: absolute;
+      content: '';
+      top: -5px;
+      right: -5px;
+      bottom: -5px;
+      left: -5px;
+      border: 5px solid red;
+    }
+  </style>
+</head>
+<body>
+  <table class="method-1">
+    <col>
+    <col>
+    <col>
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+  </table>  
+
+  <table class="method-2">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+  </table>  
+
+  <ul class="method-3">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>8</li>
+    <li>9</li>
+  </ul>
+
+  <table class="method-4">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+    </tr>
+  </table>  
+  
+</body>
+</html>

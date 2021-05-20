@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+    }
+
+    /*  */
+    .method-1 {
+      width: 100px;
+      height: 100px;
+      border: 10px outset gray;
+    }
+    .method-1 p {
+      width: 10px;
+      height: 10px;
+      border: 10px outset red;
+
+      margin: 35px auto;
+      
+    }
+
+    /* 使用定位居中*/
+    .method-2 {
+      width: 100px;
+      height: 100px;
+      border: 10px outset gray;
+      position: relative;
+    }
+    .method-2 p {
+      width: 10px;
+      height: 10px;
+      border: 10px outset red;
+
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
+
+    /* 使用行内元素居中 */
+    .method-3 {
+      width: 100px;
+      height: 100px;
+      border: 10px outset gray;
+      text-align: center;
+      line-height: 100px;
+    }
+    .method-3 p {
+      display: inline;
+      border: 10px outset red;
+      
+    }
+
+    /* 使用表单元格居中 */
+    .method-4 {
+      display: table-cell;
+      width: 100px;
+      height: 100px;
+      border: 10px outset gray;
+      vertical-align: middle;
+    }
+    .method-4 p {
+      width: 10px;
+      height: 10px;
+      border: 10px outset red;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="method-1"><p></p></div>
+  <div class="method-2"><p></p></div>
+  <div class="method-3"><p></p></div>
+  <div class="method-4"><p></p></div>
+  <div class="method-5"><p></p></div>
+</body>
+</html>
