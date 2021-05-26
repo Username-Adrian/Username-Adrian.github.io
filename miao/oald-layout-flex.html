@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+
+    main {
+      display: flex;
+      height: 100%;
+    }
+    main div:nth-child(2) {
+      flex-grow: 1;
+    }
+
+    main > div:nth-child(1) {
+      min-width: 190px;
+      height: 100%;
+      border-right: 2px solid black;
+    }
+    div div:nth-child(1) {
+      width: calc(100% -576px);
+      height: 65px;
+      border-bottom: 2px solid black;
+    }
+    div div:nth-child(2) {
+      width: calc(100% -576px);
+      height: calc(100% - 67px);
+      overflow: scroll;
+    }
+    main div:nth-child(3) {
+      min-width: 190px;
+      height: 100%;
+      border-left: 2px solid black;
+    }
+    main div:nth-child(4) {
+      min-width: 190px;
+      height: 100%;
+      border-left: 2px solid black;
+    }
+
+  </style>
+</head>
+<body>
+  <main>
+    <div>1</div>
+    <div>
+      <div>2</div>
+      <div>3
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. A dolorem modi consequuntur itaque fuga cumque reprehenderit distinctio laboriosam illum excepturi, voluptatum voluptatibus aperiam sapiente doloremque reiciendis id quae quaerat veniam?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat dolores debitis amet nihil labore? Quas in fugit quam explicabo! Illo id eos dolorum doloribus doloremque quas cum ea deserunt provident.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. At sunt illo qui repellendus molestias quod quae nobis, autem aspernatur quis fuga et corporis, pariatur perspiciatis earum amet dicta, dolore consectetur?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi sapiente nam tempora cumque numquam alias aut quod ipsa facere corrupti amet labore ut, nulla ea ad quibusdam quia nemo exercitationem?
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum et veniam nulla iste officiis harum, iure cupiditate nam sunt voluptate nemo incidunt, a id repellendus soluta voluptatibus dolorem, porro provident.
+      </div>
+    </div>
+    <div>4</div>
+    <div>5</div>
+  </main>
+</body>
+</html>
