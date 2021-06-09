@@ -124,7 +124,7 @@
   console.log(result)
 </script>
 
-<script id="ch0103/14" type="">
+<script id="ch0103/14" type="hidden">
   var h = Number(prompt('14.大象要喝 20000ml 水，需要小圆桶请给定桶的半径和高，我们算最少需要的桶数。请给定桶子的高 h ：'))
   var r = Number(prompt('请给定桶子的半径 r ：'))
   var quotient = (20000 - 20000 % (3.14159 * r**2 * h))  / (3.14159 * r**2 * h)
@@ -239,9 +239,9 @@
   var char = prompt('4.任意输入一个字符，判断其ASCII是否是奇数，若是，输出YES，否则，输出NO，请先输入 char：')
   
   if (char.charCodeAt() % 2 === 0) {
-    console.log('even')
+    console.log('NO')
   } else {
-    console.log('odd')
+    console.log('YES')
   }
 
 </script>
@@ -447,7 +447,7 @@
 <script id="ch0104/17" type="hidden">
   var y = Number(prompt('17.判断某年是否为闰年;请先输入年份 y：'))
   
-  if ((y % 100 === 0 && y % 400 !== 0) || (y % 3200 === 0)) {
+  if ((y % 100 === 0 && y % 400 !== 0) || (y % 3200 === 0) || (y % 4) !==0) {
     console.log('N')
   } else if (y % 4 === 0) {
     console.log('Y')
@@ -497,7 +497,7 @@
   }
 </script>
 
-<script id="ch0104/20" type="hidden">
+<script id="ch0104/20" type="">
   var a = Number(prompt('20.求一元二次方程的根输入一行，包含三个浮点数a, b, c（它们之间以一个空格分开），分别表示方程ax2 + bx + c =0的系数（取五位精度）。请先输入 a：'))
   var b = Number(prompt('请先输入 b：'))
   var c = Number(prompt('请先输入 c：'))
@@ -505,12 +505,12 @@
   var result_1
   var result_2
   
-  /**
+  /*
   delta < 0 时, 两个虚根的求解公式。
   result_1 = (-b + i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) - i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
   result_2 = (-b - i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) + i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
   
-  **/
+  */
 
   if (delta > 0) {
     result_1 = (-b + Math.sqrt(delta)) / (2 * a)
@@ -518,8 +518,8 @@
     console.log(result_1)
     console.log(result_2)
   } else if (delta < 0) {
-    result_1 = '' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
-    result_2 = '' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+    result_1 = 'result_1=' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+    result_2 = 'result_2' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
     console.log(result_1)
     console.log(result_2)
   } else if (delta = 0) {
