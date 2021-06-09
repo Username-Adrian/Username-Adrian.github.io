@@ -19,9 +19,11 @@
   var a = Number(prompt('3.我们将计算 (a+b)/c 整除后的值，请先输入 a：'))
   var b = Number(prompt('请输入 b：'))
   var c = Number(prompt('请输入 c：'))
-  var result = ((a + b) - (a + b) % c ) / c
-
-  console.log(result)
+  /**这个取整的方法对于负数时向上取整。**/
+  var result_positive = ((a + b) - (a + b) % c ) / c
+  var result_nagetive = ((a + b) - (a + b) % c ) / c - 1
+  
+  console.log(((a + b) / c) >= 0 ?  result_positive:result_nagetive)
 </script>
 
 <script id="ch0103/04" type="hidden">
@@ -35,13 +37,11 @@
 </script>
 
 <script id="ch0103/05" type="hidden">
-  var a = Number(prompt('5.我们将计算两个数相除后浮点数部分（精确到小数点后九位），请先输入被除数 a：'))
+  var a = Number(prompt('5.我们将计算两个数相除的浮点数值（精确到小数点后九位），请先输入被除数 a：'))
   var b = Number(prompt('请输入除数 b：'))
-  var result_quotient = (a - (a % b)) / b
-  var result_float = ((a / b) - (a - (a % b)) / b).toFixed(9)
+  var result = (a / b).toFixed(9)
 
-  console.log(result_quotient)
-  console.log(result_float)
+  console.log(result)
 </script>
 
 <script id="ch0103/06" type="hidden">
@@ -53,11 +53,12 @@
 </script>
 
 <script id="ch0103/07" type="hidden">
-  var a = Number(prompt('7.对于多项式f(x) = ax^3 + bx^2 + cx + d 和给定的a, b, c, d, x，计算f(x)的值。请输入 a：'))
+  var x = Number(prompt('7.对于多项式f(x) = ax^3 + bx^2 + cx + d 和给定的a, b, c, d, x，计算f(x)的值。请输入 x：'))
+  var a = Number(prompt('请输入 a：'))
   var b = Number(prompt('请输入 b：'))
   var c = Number(prompt('请输入 c：'))
   var d = Number(prompt('请输入 d：'))
-  var x = Number(prompt('请输入 x：'))
+  
 
   var fun_value = (a * x ** 3 + b * x ** 2 + c * x + d).toFixed(7)
 
@@ -74,8 +75,8 @@
   var radius = Number(prompt('9.给出圆的半径，求圆的直径（diameter）、周长（girth）和面积（area）。请输入圆的半径（radius） radius：'))
  
   var diameter = (2 * radius).toFixed(4)
-  var girth = (2 * 3.1415926 * radius).toFixed(4)
-  var area = (3.1415926 * radius**2).toFixed(4)
+  var girth = (2 * 3.14159 * radius).toFixed(4)
+  var area = (3.14159 * radius**2).toFixed(4)
   console.log(diameter)
   console.log(girth)
   console.log(area)
@@ -89,7 +90,7 @@
   console.log(result)
 </script>
 
-<script id="ch0103/11" type="">
+<script id="ch0103/11" type="hidden">
   var a = Number(prompt('11.计算浮点数相除的余数如：a÷b的余数。请输入 a：'))
   var b = Number(prompt('11.计算浮点数相除的余数如：a÷b的余数。请输入 b：'))
 
@@ -97,8 +98,8 @@
   var a_judge_bit = Number(String(a).length - a_judge);  //小数的位数
   var b_judge = Number(String(b).indexOf('.') + 1);  
   var b_judge_bit = Number(String(b).length - b_judge); 
-  var a_judge_ok = ((a * 10**a_judge_bit) / (b * 10**a_judge_bit)) / 10**a_judge_bit
-  var b_judge_ok = ((a * 10**b_judge_bit) / (b * 10**b_judge_bit)) / 10**b_judge_bit
+  var a_judge_ok = ((a * 10**a_judge_bit) % (b * 10**a_judge_bit)) / 10**a_judge_bit
+  var b_judge_ok = ((a * 10**b_judge_bit) % (b * 10**b_judge_bit)) / 10**b_judge_bit
 
   var result = ((a_judge_bit > b_judge_bit) ? a_judge_ok:b_judge_ok)
 
@@ -126,8 +127,8 @@
 <script id="ch0103/14" type="hidden">
   var r = Number(prompt('14.大象要喝 20000ml 水，需要小圆桶请给定桶的半径和高，我们算最少需要的桶数。请给定桶子的半径 r ：'))
   var h = Number(prompt('请给定桶子的高 h ：'))
-  var quotient = (20000 - 20000 % (3.1415926 * r**2 * h))  / (3.1415926 * r**2 * h)
-  var float = (20000 / (3.1415926 * r**2 * h)) - ((20000 - 20000 % (3.1415926 * r**2 * h))  / (3.1415926 * r**2 * h))
+  var quotient = (20000 - 20000 % (3.14159 * r**2 * h))  / (3.14159 * r**2 * h)
+  var float = (20000 / (3.14159 * r**2 * h)) - ((20000 - 20000 % (3.14159 * r**2 * h))  / (3.14159 * r**2 * h))
   result = (float ? (quotient + 1) : quotient)
 
   console.log(result)
