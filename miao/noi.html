@@ -124,12 +124,12 @@
   console.log(result)
 </script>
 
-<script id="ch0103/14" type="hidden">
-  var r = Number(prompt('14.大象要喝 20000ml 水，需要小圆桶请给定桶的半径和高，我们算最少需要的桶数。请给定桶子的半径 r ：'))
-  var h = Number(prompt('请给定桶子的高 h ：'))
+<script id="ch0103/14" type="">
+  var h = Number(prompt('14.大象要喝 20000ml 水，需要小圆桶请给定桶的半径和高，我们算最少需要的桶数。请给定桶子的高 h ：'))
+  var r = Number(prompt('请给定桶子的半径 r ：'))
   var quotient = (20000 - 20000 % (3.14159 * r**2 * h))  / (3.14159 * r**2 * h)
   var float = (20000 / (3.14159 * r**2 * h)) - ((20000 - 20000 % (3.14159 * r**2 * h))  / (3.14159 * r**2 * h))
-  result = (float ? (quotient + 1) : quotient)
+  result = (float > 0 ? (quotient + 1) : quotient)
 
   console.log(result)
 </script>
@@ -199,3 +199,350 @@
 
   console.log(value)
 </script>
+
+<!--  000000000000000000000000000000000000000000000000000000000000000000000 -->
+
+<script id="ch0104/01" type="hidden">
+  var N = Number(prompt('1.给定一个整数N，判断其正负，请先输入 N：'))
+  
+  if (N > 0) {
+    console.log('positive')
+  } else if (N === 0) {
+    console.log('zero')
+  } else if (N < 0) {
+    console.log('negative')
+  }  
+</script>
+
+<script id="ch0104/02" type="hidden">
+  var f = (Number(prompt('2.输出一个浮点数的绝对值，请先输入 f：'))).toFixed(2)
+  
+  if (f < 0) {
+    f = -f
+  }
+  console.log(f)
+
+</script>
+
+<script id="ch0104/03" type="hidden">
+  var integer = Number(prompt('3.输出一个浮点数的绝对值，请先输入 integer：'))
+  
+  if (integer % 2 === 0) {
+    console.log('even')
+  } else if (integer % 2 === 1) {
+    console.log('odd')
+  }
+
+</script>
+
+<script id="ch0104/04" type="hidden">
+  var char = prompt('4.任意输入一个字符，判断其ASCII是否是奇数，若是，输出YES，否则，输出NO，请先输入 char：')
+  
+  if (char.charCodeAt() % 2 === 0) {
+    console.log('even')
+  } else {
+    console.log('odd')
+  }
+
+</script>
+
+<script id="ch0104/05" type="hidden">
+  var x = Number(prompt('5.两个整数大小比较，若x > y，输出 > ;若x = y，输出 = ;若x < y，输出 < ;请先输入 x：'))
+  var y = Number(prompt('请先输入 y：'))
+  
+  if (x > y) {
+    console.log('>')
+  } else if (x == y) {
+    console.log('=')
+  } else {
+    console.log('<')
+  }
+
+</script>
+
+<script id="ch0104/06" type="hidden">
+  var positive_integer = Number(prompt('6.判断一个正整数是否是两位数（即大于等于10且小于等于99）。请先输入 positive_integer：'))
+  
+  /**不能这么 10 = positive_integer <= 99 写吗**/
+  if (10 <= positive_integer && positive_integer <= 99) {
+    console.log(1)
+  } else {
+    console.log(0)
+  }
+
+</script>
+
+<script id="ch0104/07" type="hidden">
+  var lucky_num = Number(prompt('7.收集瓶盖赢大奖；有十个以上的幸运瓶盖或者二十个以上的鼓励瓶盖时，可以兑换一个神秘大奖。请先输入幸运瓶盖数 lucky_num：'))
+  var encourage_num = Number(prompt('7.收集瓶盖赢大奖；有十个以上的幸运瓶盖或者二十个以上的鼓励瓶盖时，可以兑换一个神秘大奖。请先输入幸运瓶盖数 encourage_num：'))
+
+  if (lucky_num >= 10 || encourage_num >= 20) {
+    console.log(1)
+  } else {
+    console.log(0)
+  }
+
+</script>
+
+<script id="ch0104/08" type="hidden">
+  var num1 = Number(prompt('8.判断一个数能否同时被3和5整除。请先输入这个数 num1：'))
+
+  if (num1 % 3 === 0 && num1 % 5 === 0) {
+    console.log('YES')
+  } else {
+    console.log('NO')
+  }
+
+</script>
+
+<script id="ch0104/09" type="hidden">
+  var x = Number(prompt('9.给定一个整数，判断它能否被3，5，7整除，并输出以下信息;请先输入整数 x：'))
+  
+  if ((x % 3 === 0) && (x % 5 === 0) && (x % 7 === 0)) {
+    console.log(3, 5, 7)
+  } else if ((x % 3 === 0) && (x % 5 === 0)) {
+    console.log(3, 5)
+  } else if ((x % 3 === 0) && (x % 7 === 0)) {
+    console.log(3, 7)
+  } else if ((x % 5 === 0) && (x % 7 === 0)) {
+    console.log(5, 7)
+  } else if (x % 3 === 0) {
+    console.log(3)
+  } else if (x % 5 === 0) {
+    console.log(5)
+  } else if (x % 7 === 0) {
+    console.log(7)
+  } else {
+    console.log('n')
+  }
+
+  /**
+  Another Answer
+  if (x % 3 == 0 || x % 5 == 0 || x % 7 === 0) {
+    if (x % 3 == 0) {
+      console.log(3)
+    }
+    if (x % 5 == 0) {
+      console.log(5)
+    }
+    if (x % 7 == 0) {
+      console.log(7)
+    }
+  } else {
+    console.log('n')
+  }
+  **/
+
+</script>
+
+<script id="ch0104/10" type="hidden">
+  var y = Number(prompt('10.给出一名学生的语文和数学成绩，判断他是否恰好有一门课不及格（成绩小于60分）。分别是该生的语文成绩和数学成绩。;请先输入语文成绩 y：'))
+  var s = Number(prompt('请先输入数学成绩 s：'))
+  if (s < 60 || y < 60) {
+    console.log(1)
+  } else {
+    console.log(0)
+  }
+
+</script>
+<script id="ch0104/11" type="hidden">
+  var x = Number(prompt('11.输入一个星期的时间，判断晶晶能不能接受约会;请先输入 x：'))
+  
+  if (x !== 1 || x !== 3 || x !==5) {
+    console.log('YES')
+  } else {
+    console.log('NO')
+  }
+
+</script>
+
+<script id="ch0104/12" type="hidden">
+  var distance = Number(prompt('12.骑车与走路 ;请先输入路程 distance：'))
+  
+  if ((distance / 3 + 50) > (distance / 1.2)) {
+    console.log('Walk')
+  } else if ((distance / 3 + 50) === (distance / 1.2)) {
+    console.log('All')
+  }
+  else {
+    console.log('Bike')
+  }
+
+</script>
+
+<script id="ch0104/13" type="hidden">
+  var x = Number(prompt('13.求分段函数;请先输入 x：'))
+  var y
+
+  if (0 <= x & x < 5) {
+    y = (-x + 2.5).toFixed(3)
+    console.log(y)
+  } else if (5 <= x & x < 10) {
+    y = (2 - 1.5 * (x -3) * (x -3)).toFixed(3)
+    console.log(y)
+  } else if (10 <= x & x < 20) {
+    y = (x / 2 - 1.5).toFixed(3)
+    console.log(y)
+  }
+
+</script>
+
+<script id="ch0104/14" type="hidden">
+  var g = Number(prompt('13.计算邮费;请先输入 重量(g) g：'))
+  var urgent = prompt('13.计算邮费;请先输入 是否加急(y/n) urgent：')
+  var money
+
+  if (g <= 1000 && urgent === 'y') {
+    money = 8 + 5
+    console.log(money)
+  } else if (g <= 1000 && urgent === 'n') {
+    money = 8
+    console.log(money)
+  } else if (g > 1000 && urgent === 'y' && g % 500 > 0) {
+    money = ((g - (g - 1000) % 500) / 500 + 1) * 4 + 5
+    console.log(money)
+  } else if (g > 1000 && urgent === 'y' && g % 500 === 0) {
+    money = ((g / 500) * 4) + 5
+    console.log(money)
+  } else if (g > 1000 && urgent === 'n' && g % 500 > 0) {
+    money = ((g - (g - 1000) % 500) / 500 + 1) * 4
+    console.log(money)
+  } else if (g > 1000 && urgent === 'n' && g % 500 === 0) {
+    money = (g / 500) * 4
+    console.log(money)
+  } 
+
+</script>
+
+<script id="ch0104/15" type="hidden">
+  var x1 = Number(prompt('15.输入三个整数,输出最大的数。请先输入 x1：'))
+  var x2 = Number(prompt('请先输入 x2：'))
+  debugger
+  var x3 = Number(prompt('请先输入 x3：'))
+  
+  if ((x1 > x2 && x2 > x3) || (x1 > x3 && x3 > x2)) {
+    console.log(x1)
+  } else if ((x2 > x1 && x1 > x3) || (x2 > x3 && x3 > x1)) {
+    console.log(x2)
+  } else if ((x3 > x1 && x1 > x2) || (x3 > x2 && x2 > x1)) {
+    console.log(x3)
+  }
+
+</script>
+
+<script id="ch0104/16" type="hidden">
+  /** 三角形成立的条件：任意两条边之和大于第三条边 **/
+  var x1 = Number(prompt('16.三角形能否成立的判断。请先输入第一条边 x1：'))
+  var x2 = Number(prompt('请先输入第二条边 x2：'))
+  var x3 = Number(prompt('请先输入第二条边 x3：'))
+  
+  if ((x1 + x2) > x3 && (x1 + x3) > x2 && (x3 + x2) > x1) {
+    console.log("yes")
+  } else {
+    console.log('no')
+  }
+
+</script>
+
+<script id="ch0104/17" type="hidden">
+  var y = Number(prompt('17.判断某年是否为闰年;请先输入年份 y：'))
+  
+  if ((y % 100 === 0 && y % 400 !== 0) || (y % 3200 === 0)) {
+    console.log('N')
+  } else if (y % 4 === 0) {
+    console.log('Y')
+  }
+
+</script>
+
+<script id="ch0104/18" type="hidden">
+  var x = Number(prompt('18.判断一个点是否在一个正方形内;请先输入横坐标 x：'))
+  var y = Number(prompt('请先输入纵坐标 y：'))
+  
+  if ((x >= -1 && x <= 1) && (y >= -1 && y <= 1)) {
+    console.log('yes')
+  } else {
+    console.log('no')
+  }
+
+</script>
+
+<script id="ch0104/19" type="hidden">
+  var x1 = Number(prompt('19.简单计算器，有三个参数，第一二是整数，第三个是操作符;请先输入第一个整数 x1：'))
+  var x2 = Number(prompt('请输入第二个整数 x2：'))
+  var o = prompt('请输入操作符 o：')
+  var result
+
+  if (x2 === 0 && o === '/') {
+    console.log('Divided by zero!')
+  } else if (o === '+' || o === '-' || o === '*' || o === '/') {
+    if (o === '+') {
+      result = x1 + x2
+      console.log(result)
+    }
+    if (o === '-') {
+      result = x1 - x2
+      console.log(result)
+    }
+    if (o === '*') {
+      result = x1 * x2
+      console.log(result)
+    }
+    if (o === '/') {
+      result = x1 / x2
+      console.log(result)
+    }
+  } else if (o !== '+' && o !== '-' && o !== '*' && o !== '/') {
+    console.log('Invalid operate!')
+  }
+</script>
+
+<script id="ch0104/20" type="hidden">
+  var a = Number(prompt('20.求一元二次方程的根输入一行，包含三个浮点数a, b, c（它们之间以一个空格分开），分别表示方程ax2 + bx + c =0的系数（取五位精度）。请先输入 a：'))
+  var b = Number(prompt('请先输入 b：'))
+  var c = Number(prompt('请先输入 c：'))
+  var delta = b**2 - 4 * a * c
+  var result_1
+  var result_2
+  
+  /**
+  delta < 0 时, 两个虚根的求解公式。
+  result_1 = (-b + i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) - i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+  result_2 = (-b - i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) + i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+  
+  **/
+
+  if (delta > 0) {
+    result_1 = (-b + Math.sqrt(delta)) / (2 * a)
+    result_2 = (-b - Math.sqrt(delta)) / (2 * a)
+    console.log(result_1)
+    console.log(result_2)
+  } else if (delta < 0) {
+    result_1 = '' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+    result_2 = '' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+    console.log(result_1)
+    console.log(result_2)
+  } else if (delta = 0) {
+    result_1 = -b / (2 * a)
+    result_2 = -b / (2 * a)
+    console.log(result_1, result_2)
+  } 
+
+</script>
+
+<script id="ch0104/21" type="hidden">
+  var n = Number(prompt('21.虫子又要吃苹果了;请先输入苹果数 n：'))
+  var x = Number(prompt('请输入虫子吃苹果的速度 1/x 个/小时 x：'))
+  var y = Number(prompt('请输入经过的时间（小时） y：'))
+  var bad_app_num = Math.ceil(y / x)
+  var result
+  
+  if (bad_app_num >= 0 && bad_app_num < n) {
+    result = n - bad_app_num
+    console.log(result)
+  } else if (bad_app_num >= n) {
+    console.log('Your enter is bad')
+  } 
+
+</script>
+
