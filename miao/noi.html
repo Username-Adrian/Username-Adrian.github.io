@@ -502,30 +502,30 @@
   var b = Number(prompt('请先输入 b：'))
   var c = Number(prompt('请先输入 c：'))
   var delta = b**2 - 4 * a * c
-  var result_1
-  var result_2
+  var x1
+  var x2
   
   /*
   delta < 0 时, 两个虚根的求解公式。
-  result_1 = (-b + i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) - i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
-  result_2 = (-b - i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) + i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+  x1 = (-b + i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) - i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+  x2 = (-b - i * Math.sqrt(-delta)) / (2 * a) = (-b / (2 * a)) + i * (Math.sqrt(-delta) / (2 * a)) = '' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
   
   */
 
   if (delta > 0) {
-    result_1 = (-b + Math.sqrt(delta)) / (2 * a)
-    result_2 = (-b - Math.sqrt(delta)) / (2 * a)
-    console.log(result_1)
-    console.log(result_2)
+    x1 = (-b + Math.sqrt(delta)) / (2 * a)
+    x2 = (-b - Math.sqrt(delta)) / (2 * a)
+    console.log(x1)
+    console.log(x2)
   } else if (delta < 0) {
-    result_1 = 'result_1=' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
-    result_2 = 'result_2' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
-    console.log(result_1)
-    console.log(result_2)
+    x1 = 'x1=' + (-b / (2 * a)).toFixed(5) + '-' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+    x2 = 'x2' + (-b / (2 * a)).toFixed(5) + '+' +(Math.sqrt(-delta) / (2 * a)).toFixed(5) + 'i'
+    console.log(x1)
+    console.log(x2)
   } else if (delta = 0) {
-    result_1 = -b / (2 * a)
-    result_2 = -b / (2 * a)
-    console.log(result_1, result_2)
+    x1 = -b / (2 * a)
+    x2 = -b / (2 * a)
+    console.log(x1, x2)
   } 
 
 </script>
