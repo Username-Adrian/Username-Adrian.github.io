@@ -544,3 +544,678 @@
 
 </script>
 
+<!--  000000000000000000000000000000000000000000000000000000000000000000000 -->
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var age = 0
+  var sum = 0
+ 
+  while (n > 0) {
+    age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  var age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/02" type="hidden">
+  var counter = 0
+  var sum = 0
+  n = 0
+  var money = 0
+
+  while (n < 12) {
+    n = n + 1
+    // 模板字符串需要字符串使用 `` 这个符号
+    money = Number(prompt(`02.Larry想要看自己12个月有多少钱（小数点后保留两位）。请输入 ${n} 月的结余 money：`))
+    sum = money + sum
+  }
+
+  var money_average = `$` + (sum / 12).toFixed(2)
+  console.log(money_average)
+</script>
+
+<script id="ch0105/03" type="hidden">
+  var n = Number(prompt(`03.计算一组样本的数量。请先输入样本数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var data_average
+  var data = 0
+
+  while (n > 0) {
+    data = Number(prompt(`请输入的第一个${ origin_n - n + 1}样本的数据 data：`))
+    sum = data+ sum
+    n = n - 1
+  }
+
+  data_average = (sum / origin_n).toFixed(5)
+  console.log(data_average)
+</script>
+
+<script id="ch0105/04" type="hidden">
+  var n = Number(prompt(`04.求整数的和与平均值（小数点后保留五位）。请先输入整数个数 n：`))
+  var origin_n = n
+  var sum = 0
+  var value_average = 0
+  var value = 0
+
+  while (n > 0) {
+    value = Number(prompt(`请输入的第一个${ origin_n - n + 1} 整数的值 value：`))
+    sum = value + sum
+    n = n - 1
+  }
+
+  value_average = (sum / origin_n).toFixed(5)
+  console.log(sum, value_average)
+</script>
+
+<script id="ch0105/05" type="hidden">
+  var n = Number(prompt(`05.求班级里面学生的成绩的最高分。请先输入学生数量 n：`))
+  var student_n = n
+  var student_score = 0
+  var score = 0
+
+  while (n > 0) {
+    score = Number(prompt(`请输入的第一个${ student_n - n + 1} 学生的成绩 score：`))
+
+    if (score > student_score) {
+      student_score = score
+    }
+    n = n - 1
+  }
+
+  console.log(student_score)
+</script>
+
+<script id="ch0105/06" type="hidden">
+  var n = Number(prompt(`06.求一组数中最大值和最小值的差。请先数的数量 n：`))
+  var origin_n = n
+  var max = -Infinity
+  var min = Infinity
+  var num = 0
+  while (n > 0) {
+    num = Number(prompt(`请输入第 ${ origin_n - n + 1} 数 num：`))
+
+    if (num > max) {
+      max = num
+    }
+    if (num < min) {
+      min = num
+    }
+    n = n-1
+  }
+
+  var difference = max - min
+  console.log(difference)
+</script>
+
+<script id="ch0105/07" type="hidden">
+  var n = Number(prompt(`07.奥运会奖牌计数。请先决赛的次数 n：`))
+  var origin_n = n
+  var sum = 0
+  var gold_num = 0
+  var sliver_num = 0
+  var copper_num = 0
+  var gold = 0
+
+  while (n > 0) {
+    gold = Number(prompt(`请输入第 ${ origin_n - n + 1} 天决赛的金牌数 gold：`))
+    var sliver = Number(prompt(`请输入第 ${ origin_n - n + 1} 天决赛的银牌数 sliver：`))
+    var copper = Number(prompt(`请输入第 ${ origin_n - n + 1} 天决赛的金牌数 copper：`))
+
+    gold_num = gold_num + gold
+    sliver_num = sliver_num + sliver
+    copper_num = copper_num + copper
+    
+    n = n - 1
+  }
+
+  sum = gold_num + sliver_num + copper_num
+  console.log( gold_num, sliver_num, copper_num, sum)
+</script>
+
+<script id="ch0105/08" type="hidden">
+  var n = Number(prompt(`08.多边形内角和。请先输入这是几边形 n：`))
+  var origin_n = n
+  var last_degree = (n - 2 ) * 180
+  var degree = 0
+
+  while ((n - 1) > 0) {
+    degree = Number(prompt(`请输入 ${origin_n} 边形的第 ${origin_n - n + 1} 个度数 degree：`))
+    last_degree = last_degree - degree
+    n = n - 1
+  }
+
+  console.log(last_degree)
+</script>
+
+<script id="ch0105/09" type="hidden">
+  var num1 = Number(prompt(`09.两个数之间的所有奇数的和）。请先输入第一个数 num1：`))
+  var num2 = Number(prompt(`请先输入第二个数 num2：`))
+  var difference = 0
+  var sum = 0
+  var odd_num_sum = 0
+
+  if (num1 > num2) {
+    difference = num1 - num2
+    sum = num2
+  } else if (num1 < num2) {
+    difference = num2 - num1
+    sum = num1
+  }
+  var origin_sum = sum
+
+  while (difference >= 0) { 
+    sum = origin_sum + difference
+
+    if (sum % 2 === 1) {
+      odd_num_sum = odd_num_sum + sum
+    }
+
+    difference = difference - 1
+  }
+
+  console.log(odd_num_sum)
+</script>
+
+<script id="ch0105/10" type="hidden">
+  var num1 = Number(prompt(`10.满足条件的数累加。将正整数 m 和 n 之间（包括 m 和 n）能被 17 整除的数累加。请先输入第一个数 num1：`))
+  var num2 = Number(prompt(`请先输入第二个数 num2：`))
+  debugger
+  var difference = 0
+  var sum = 0
+  var odd_num_sum = 0
+
+  if (num1 > num2) {
+    difference = num1 - num2
+    sum = num2
+  } else if (num1 < num2) {
+    difference = num2 - num1
+    sum = num1
+  }
+  var origin_sum = sum
+
+  while (difference >= 0) { 
+    sum = origin_sum + difference
+
+    if (sum % 17 === 0) {
+      odd_num_sum = odd_num_sum + sum
+    }
+
+    difference = difference - 1
+  }
+
+  console.log(odd_num_sum)
+</script>
+
+<script id="ch0105/11" type="hidden">
+  var n = Number(prompt(`11.  1, 5 10 三个整数的个数。请先输入整数的个数 n：`))
+  var origin_n = n
+  var num1 = 0
+  var num2 = 0
+  var num3 = 0
+
+  for (var num = 0; n > 0; n = n - 1) {
+    num = Number(prompt(`请先输入第 ${origin_n - n +1} 个整数 n：`))
+    if (num === 1) {
+      num1 = num1 + 1
+    }
+    if (num === 5) {
+      num2 = num2 + 1
+    }
+    if (num === 10) {
+      num3 = num3 + 1
+    }
+  }
+
+  console.log(num1, num2, num3)
+</script>
+
+<script id="ch0105/12" type="hidden">
+  var n = Number(prompt(`12. 求与指定数字相同的个数。请先输入整数的个数 n：`))
+  var appoint_num = Number(prompt(`12. 求与指定数字相同的个数。请先输入整数的个数 appoint_num：`))
+  var origin_n = n
+  var counter_same = 0
+
+  for (var num = 0; n > 0; n = n - 1) {
+    num = Number(prompt(`请先输入该整数列中的第 ${origin_n - n +1} 个整数 n：`))
+    if (num === appoint_num) {
+      counter_same = counter_same +1
+    }
+  }
+
+  console.log(counter_same)
+</script>
+
+<script id="ch0105/13" type="hidden">
+  /* 幂运算/指数运算 */
+  var a = Number(prompt(`13.计算乘方。请先输入底数 a：`))
+  var n = Number(prompt(`请先输入指数 n：`))
+  var origin_n = n
+  var result = 1
+  var age_average
+ 
+  for (; n > 0 ;n = n - 1) {
+    result = result * a
+  }
+
+  console.log(result)
+</script>
+
+<script id="ch0105/14" type="hidden">
+  var people = Number(prompt(`14.计算我国人口（小数点后保留四位，人口以亿为单位）。请先输入人口基数 people：`))
+  var year = Number(prompt(`请输入几年（year） year：`))
+ 
+  for (; year > 0 ;year = year - 1) {
+    people = people * (1 + 0.001)
+  }
+
+  console.log(people.toFixed(4))
+</script>
+
+<script id="ch0105/15" type="hidden">
+  var rate = Number(prompt(`15.约翰也想投资挣钱。请先输入复合年利率（0-20） 
+  rate：`))
+  var money = Number(prompt(`请输入投资的资金量 money：`))
+  var year = Number(prompt(`请输入投资的时间（year） year：`))
+ 
+  for (; year > 0 ;year = year - 1) {
+    money = money * (1 + rate / 100)
+  }
+
+  console.log(Math.trunc(money))
+</script>
+
+<script id="ch0105/16" type="hidden">
+  var programer_salar = Number(prompt(`16.程序员买房子。请先输入程序员的年薪 programer_salar：`))
+  var k = Number(prompt(`请输入房子的升值速度 k：`))
+  var home_money = 200
+  var programer_money = 50
+  var year = 1
+
+  for (; year <= 20 ; year = year + 1) {
+    home_money = home_money * (1 + k / 100 )
+    programer_money = programer_money + programer_salar
+
+    if (programer_money >= home_money) {
+      break;
+    } else if (200 * (1 + k / 100)**20 >= programer_money && year === 20) {
+      console.log('Impossible')
+    }
+    console.log(home_money, programer_money)
+  }
+
+  console.log(year + 1)
+</script>
+
+<script id="ch0105/17" type="">
+  var n = Number(prompt(`17.求菲波那契数列。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
+
+<script id="ch0105/01" type="hidden">
+  var n = Number(prompt(`01.求班级里面学生的平均年龄（小数点后保留两位）。请先输入学生数量 n：`))
+  var origin_n = n
+  var sum = 0
+  var age_average
+ 
+  while (n > 0) {
+    var age = Number(prompt(`请输入学生的年龄 age：`))
+    sum = age + sum
+    n = n - 1
+  }
+
+  age_average = (sum / origin_n).toFixed(2)
+  console.log(age_average)
+</script>
