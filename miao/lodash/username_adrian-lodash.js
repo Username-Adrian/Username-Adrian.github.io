@@ -99,9 +99,9 @@ var username_adrian = function () {
   }
 
 
-  function union([...arrays]) {
-    return []
-  }
+  // function union([...arrays]) {
+  //   return []
+  // }
 
 
   var result = []
@@ -120,28 +120,28 @@ var username_adrian = function () {
 
 
   // 没做好
-  var result = []
-  function flattenDepth(array, depth=1) {
+  // var result = []
+  // function flattenDepth(array, depth=1) {
     
-    for (var i = 0; i < array.length; i++) {
-      var value = array[i]
-      // if (depth > 0) {
-        if (Array.isArray(value)) {
-          if (depth <= 0) {
-            return result
-          }
-          depth--
-          flattenDepth(value, depth)
-        } else {
-          result.push(value)
-          // return result
-        }
-      // } else {
-      //   return result
-      // }
-    }
-    return result
-  }
+  //   for (var i = 0; i < array.length; i++) {
+  //     var value = array[i]
+  //     // if (depth > 0) {
+  //       if (Array.isArray(value)) {
+  //         if (depth <= 0) {
+  //           return result
+  //         }
+  //         depth--
+  //         flattenDepth(value, depth)
+  //       } else {
+  //         result.push(value)
+  //         // return result
+  //       }
+  //     // } else {
+  //     //   return result
+  //     // }
+  //   }
+  //   return result
+  // }
 
 
   function groupBy(collection, f) {
@@ -174,11 +174,11 @@ var username_adrian = function () {
 
 
   // 未完成
-  function keyBy(collection, f) {
-    for (var i = 0; i < collection.length; i++) {
+  // function keyBy(collection, f) {
+  //   for (var i = 0; i < collection.length; i++) {
 
-    }
-  }
+  //   }
+  // }
 
 
   function forEach(collection, f) {
@@ -214,36 +214,36 @@ var username_adrian = function () {
 
 
   // 未完成
-  function filter(collection, f) {
-    var result = []
-    var map = {}
-    if (Array.isArray(collection)) {
-      for (var i = 0; i < collection.length; i++) {
-        result.push(f(collection[i]))
-      }
-      return result
-    }
-    if (typeof(f) == 'function') {
-      for (var k in collection) {
-        if (condition) {
+  // function filter(collection, f) {
+  //   var result = []
+  //   var map = {}
+  //   if (Array.isArray(collection)) {
+  //     for (var i = 0; i < collection.length; i++) {
+  //       result.push(f(collection[i]))
+  //     }
+  //     return result
+  //   }
+  //   if (typeof(f) == 'function') {
+  //     for (var k in collection) {
+  //       if (condition) {
           
-        }
+  //       }
         
-      }
-    }
-    if (Object.prototype.toString.call(collection) === '[object Object]') {
-      for (var j in collection) {
-        map[j] = f(collection[j], j)
-      }
-      return map
-    }
-  }
+  //     }
+  //   }
+  //   if (Object.prototype.toString.call(collection) === '[object Object]') {
+  //     for (var j in collection) {
+  //       map[j] = f(collection[j], j)
+  //     }
+  //     return map
+  //   }
+  // }
 
 
   // 不理解
-  function keys(obj) {
+  // function keys(obj) {
     
-  }
+  // }
 
 
   function reverse(array) {
@@ -323,13 +323,13 @@ var username_adrian = function () {
     concat: concat,
     difference: difference,
     flattenDeep: flattenDeep,
-    flattenDepth: flattenDepth,
+    // flattenDepth: flattenDepth,
     groupBy: groupBy,
-    keyBy: keyBy,
+    // keyBy: keyBy,
     forEach: forEach,
     map: map,
-    filter: filter,
-    keys: keys,
+    // filter: filter,
+    // keys: keys,
     reverse: reverse,
     countBy: countBy,
     shuffle: shuffle,
