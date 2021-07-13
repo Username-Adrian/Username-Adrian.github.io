@@ -242,17 +242,7 @@ var username_adrian = function () {
 
   // 不理解
   function keys(obj) {
-    var result = []
-    if (Object.prototype.toString.call(collection) === '[object Object]') {
-      for (var key in obj) {
-        if (!(key in map)) {
-          map[key] = key
-        }
-      }
-      if
-    } else {
-      
-    }
+    
   }
 
 
@@ -347,3 +337,4 @@ var username_adrian = function () {
 
   }
 }()
+  
