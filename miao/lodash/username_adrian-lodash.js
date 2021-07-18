@@ -104,6 +104,7 @@ var username_adrian = function () {
   // }
 
 
+  // 递归方法展开数组
   var result = []
   function flattenDeep(array) {
     for (var i = 0; i < array.length; i++) {
@@ -119,29 +120,24 @@ var username_adrian = function () {
   }
 
 
-  // 没做好
-  // var result = []
-  // function flattenDepth(array, depth=1) {
-    
-  //   for (var i = 0; i < array.length; i++) {
-  //     var value = array[i]
-  //     // if (depth > 0) {
-  //       if (Array.isArray(value)) {
-  //         if (depth <= 0) {
-  //           return result
-  //         }
-  //         depth--
-  //         flattenDepth(value, depth)
-  //       } else {
-  //         result.push(value)
-  //         // return result
-  //       }
-  //     // } else {
-  //     //   return result
-  //     // }
-  //   }
-  //   return result
-  // }
+  // 递归展开数组，并传入参数来控制递归的深度
+  function flattenDepth(array, depth=1, result=[]) {
+    for (var i = 0; i < array.length; i++) {
+      var value = array[i]
+      // if (depth > 0) {
+        if (Array.isArray(value)) {
+          if (depth <= 0) {
+            result.push(value)
+            continue  // 当 depth < 0 时，停止当前循环语句的继续执行，开始下一次循环，不然会 depth 负数的时候也会进入下一个递归中，导致多遍历几次数组。
+          }
+          depth--
+          flattenDepth(value, depth, result)
+        } else {
+          result.push(value)
+        }
+    }
+    return result
+  }
 
 
   function groupBy(collection, f) {
@@ -277,10 +273,9 @@ var username_adrian = function () {
       } else {
         var f_result = f(value)
         if (map[f_result] == undefined) {  // !(f(value) in map)
-          map[f_result] = []
-          map[f_result].push(value)
+          map[f_result] = 1
         } else {
-          map[f_result].push(value)
+          map[f_result]++
         }
       }
     }
@@ -317,13 +312,91 @@ var username_adrian = function () {
     }
   }
 
+
+  // 检查传入的参数是否是 null 或者是 undefined
+  function isNil(value) {
+    if (value === null || value === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+  
+  // 检查传入的参数是否是 undefined 
+  function isUndefined(value) {
+    if ( value === undefined) {
+      return true
+    } else {
+      return false
+    }
+  }
+
+
+  // 将传入的字符串对象的值转化成列表
+  function toArray(value) {
+    var result = []
+    if (Object.prototype.toString.call(value) === '[object Object]') {
+      for (var i in value) {
+        result.push(value[i])
+      }
+    } else if (typeof value === 'string') {
+      // 字符串的判断方法：https://segmentfault.com/q/1010000002911430
+      for (var j = 0; j < value.length; j++) {
+        result.push(value[j])
+      }
+    } else {
+      return []
+    }
+    return result
+  }
+
+
+  // 求数组的和，除了字符串返回原来的值，其余返回 0。
+  function sum(array) {
+    var sum = 0
+    if (Array.isArray(array)) {
+      for (var i = 0; i < array.length; i++) {
+        sum += array[i]
+      }
+      return sum
+    } else if (typeof(array) === 'string') {
+      return array
+    } else {
+      return sum
+    }
+  }
+
+
+  // 将传入的数组迭代相加。
+  function sumBy(array, f) {
+    var sum = 0
+    if (Array.isArray(array)) {
+      if (typeof(f) === 'string') {
+        for (var j = 0; j < array.length; j++) {
+          sum += array[j][f]
+        }
+        return sum
+      }
+      for (var i = 0; i < array.length; i++) {
+        sum += f(array[i])
+      }
+      return sum
+    } else if (typeof (array) === 'string') {
+      return array
+    } else {
+      return sum
+    }
+  }
+
+
   return {
     chunk: chunk,
     compact: compact,
     concat: concat,
     difference: difference,
     flattenDeep: flattenDeep,
-    // flattenDepth: flattenDepth,
+    flattenDepth: flattenDepth,
     groupBy: groupBy,
     // keyBy: keyBy,
     forEach: forEach,
@@ -334,6 +407,12 @@ var username_adrian = function () {
     countBy: countBy,
     shuffle: shuffle,
     isNaN: isNaN,
+    isNil: isNil,
+    isUndefined: isUndefined,
+    toArray: toArray,
+    sum: sum,
+    sumBy: sumBy,
+
 
   }
 }()
