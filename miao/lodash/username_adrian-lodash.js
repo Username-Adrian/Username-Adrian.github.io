@@ -191,6 +191,26 @@ var username_adrian = function () {
   }
 
 
+  function matches(obj) {
+    return function (src) {
+      for (var a in obj) {
+        if (obj[a] !== src[a]) {
+          return false
+        }
+      }
+      return true
+    }
+  }
+  function matchesProperty(array) {
+    return function (obj) {
+      for (var i = 0; i < array.length; i += 2) {
+        if (array[i + 1] !== obj[array[i]]) {
+          return false
+        }
+      }
+      return true
+    }
+  }
   function map(collection, f) {
     var result = []
     var map = {}
@@ -417,3 +437,4 @@ var username_adrian = function () {
   }
 }()
   
+

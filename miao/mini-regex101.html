@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+      /* 
+      id, onkeyup, innerHTML, 
+      */
+      input[type='text'], textarea{
+        width: 292px;
+      }
+
+      label {
+        font-family: 'Times New Roman', Times, serif;
+      }
+      label input {
+        cursor: pointer;
+      }
+      em {
+        background-color: #9fcfff;
+        font-style: normal;
+      }
+      em:nth-last-of-type(even) {
+        background-color: #d5ebff;
+      }
+      em:empty {  /* 匹配零宽断言时的位置的定位颜色 */
+        border-left: 1px dashed red;
+        margin-left: -1px;
+        background-color: transparent;
+      }
+      .cont {
+        width: 300px;
+        position: relative;
+        overflow: hidden;
+      }
+      .cont textarea,
+      .cont pre {
+        line-height: 1.3;
+        display: block;
+        padding: 4px;
+        border: 3px solid;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+        font-family: 'Times New Roman', Times, serif;
+        font-size: 1em;
+        white-space: pre-wrap;   /* 设置 textarea 和 pre 一样的折行方式 */
+        overflow-y: scroll;
+        word-break: break-all;
+      }
+      .cont textarea {
+        position: relative;
+        z-index: 9;
+        background-color: transparent;
+        
+      }
+      .cont pre {
+        position: absolute;
+        top: 0px;
+        color: transparent;
+
+      }
+      pre {
+        display: block;
+      }
+      p#regError {
+        margin: 0;
+        font-size: 0.6em;
+        color: red;
+      }
+
+  </style>
+</head>
+<body>
+  <div>
+    正则表达式：
+    <label for=""><input type="checkbox" onclick="run()" id="ignoreCase">i</label>
+    <label for=""><input type="checkbox" onclick="run()" checked id="global">g</label>
+    <label for=""><input type="checkbox" onclick="run()" id="multiline">m</label>
+
+    <br>
+    <input type="text" id="regex" oninput="run()" value='fo.'><br>  
+    <!-- id 属性会让浏览器创建一个名为 regex 的全局变量。可以通过 regex.value 获得 input 里面的内容  -->
+
+
+    <p id="regError"></p>
+    
+
+    内容：<br>
+    <div class="cont">
+
+      <pre id="result"></pre>
+      </pre>
+
+      <textarea name="" id="content" onscroll="setScroll()" spellcheck="false" cols="30" rows="10" oninput="run()">fooadaf foaafodffsofo a324fooadaf foaafodffsofo a324fooadaf foaafodffsofo a324fooadaf foaafodffsofo a324fooadaf foaafodffsofo a324fooadaf foaafodffsofo a324fooadaf foaafodffsofo a324fooadaf</textarea>
+
+    </div>
+
+
+  <script>
+    function setScroll() {
+      var scrollTop = content.scrollTop
+      result.scrollTop = scrollTop
+    }
+
+    function run() {
+      console.time('run')
+      var regexContent = regex.value
+      var flags = getFlags()
+      if (regexContent == '') {  // 当没有输入正则表达式时，new RegExp('') 的结果是 /(?:)/ 这个也会匹配开始位置。
+        result.innerHTML = ''
+        regError.innerHTML = 'Please input regular expression.'
+        return
+      }
+      try {
+        var reg = new RegExp(regexContent, flags)
+      } catch (e) {
+        regError.innerHTML = e.message
+        result.innerHTML = ''
+        return 
+      }
+      console.log(reg);
+      textContent = content.value
+      var match
+      if (reg.global) {
+        var resultHTML = ''
+        var matchIndex = reg.lastIndex
+        while (match = reg.exec(textContent)) {
+          resultHTML += textContent.slice(matchIndex, match.index)
+          resultHTML += '<em>' + match[0] + '</em>'
+          matchIndex = reg.lastIndex
+          if (match[0] == '') {  // 当匹配零宽断言时，让 lastIndex ++
+            reg.lastIndex++
+          }
+          // console.log(match, matchIndex, match.index);
+        }
+        resultHTML += textContent.slice(matchIndex)
+        result.innerHTML = resultHTML + '\n'
+      } else {
+        var resultHTML = ''
+        match = reg.exec(textContent)
+        resultHTML += textContent.slice(0, match.index)
+        resultHTML += '<em>' + match[0] + '</em>'
+        resultHTML += textContent.slice(match.index + match[0].length)
+        result.innerHTML = resultHTML + '\n'
+        // console.log(match);
+      } 
+
+      console.timeEnd('run')
+    }
+    run()
+
+    function getFlags() {
+      var flags = ''
+      if (ignoreCase.checked) {
+        flags += 'i'
+      }
+      if (global.checked) {
+        flags += 'g'
+      }
+      if (multiline.checked) {
+        flags += 'm'
+      }
+      return flags
+    }
+  </script>
+</body>
+</html>
