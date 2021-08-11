@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    #red {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      background-color: red;
+    }
+    #blue {
+      width: 50px;
+      height: 50px;
+      position: absolute;
+      background-color: blue;
+    }
+  </style>
+</head>
+<body>
+  <div style="top: 200px;left: 400px;" id="red">
+  </div>
+  <div style="top: 200px;left: 200px;" id="blue">
+  </div>
+
+  <script>
+    function block(element, right, left, up, down) {
+      var div = document.getElementById(element)
+      var speedX = 0
+      var speedY = 0
+      var rightDown = false  // 用来记录右键按下还是松开的情况
+      var leftDown = false  // 用来记录左键按下还是松开的情况
+      var upDown = false    
+      var downDown = false
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === right) {
+          speedX = 1
+          rightDown = true
+        }
+        if (e.key === left) {
+          speedX = -1
+          leftDown = true
+        }
+        if (e.key === up) {
+          speedY = -1
+          upDown = true
+        }
+        if (e.key === down) {
+          speedY = 1
+          downDown = true
+        }
+        
+        console.log(e);
+      })
+
+      document.addEventListener('keyup', function (e) {
+        if (e.key === right) {
+          rightDown = false
+          if (leftDown) {
+            speedX = -1  
+          } else {
+            speedX = 0
+          }
+        }
+        if (e.key === left) {
+          leftDown = false
+          if (rightDown) {
+            speedX = 1  
+          } else {
+            speedX = 0
+          }
+        }
+        if (e.key === up) {
+          upDown = false
+          if (downDown) {
+            speedY = 1  
+          } else {
+            speedY = 0
+          }
+        }
+        if (e.key === down) {
+          downDown = false
+          if (upDown) {
+            speedY = -1  
+          } else {
+            speedY = 0
+          }
+        }
+        
+        console.log(e);
+      })
+
+      var lastTime = 0
+      requestAnimationFrame(function move(time) {
+        var diff = time - lastTime
+        lastTime = time
+
+        div.style.left = parseFloat(div.style.left) + speedX * diff * 0.1 + 'px'
+        div.style.top = parseFloat(div.style.top) + speedY * diff * 0.1 + 'px'
+        requestAnimationFrame(move)
+      })
+    }
+
+    block('red', 'ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown')
+    block('blue', 'd', 'a', 'w', 's')
+    
+
+  </script>
+</body>
+</html>
