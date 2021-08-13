@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .dragable {
+      position: fixed;
+      width: 80px;
+      height: 80px;
+      user-select: none;  
+    }
+  </style>
+</head>
+<body>
+  <div class="dragable" style="background-color: red;left: 100px;top: 100px;"></div>
+  <div class="dragable" style="background-color: green;left: 200px;top: 100px;"></div>
+  <div class="dragable" style="background-color: yellow;left: 300px;top: 100px;"></div>
+
+  <script>
+    // var dragBlock = document.querySelector('.dragable')
+
+    var maxZIndex = 4
+    document.addEventListener('mousedown', function (downEvent) {
+      if (!downEvent.target.classList.contains('dragable')) {
+        return
+      }
+      var startPosX = downEvent.clientX  
+      var startPosY = downEvent.clientY  
+
+      var targetElem = downEvent.target
+      targetElem.style.zIndex = maxZIndex++
+      var elemBeginX = parseFloat(targetElem.style.left)
+      var elemBeginY = parseFloat(targetElem.style.top)
+      var dx = startPosX - elemBeginX
+      var dy = startPosY - elemBeginY
+
+      console.log(downEvent.target, startPosX, startPosY, elemBeginX, elemBeginY);
+      
+      window.addEventListener('mousemove', function move(moveEvent) {
+        if (moveEvent.buttons === 0) {  // 当 鼠标 没有按下时，解绑 mousemove 事件
+          window.removeEventListener('mousemove', move)
+          return
+        }
+        var mouseNowX = moveEvent.clientX - dx
+        var mouseNowY = moveEvent.clientY - dy
+
+        if (mouseNowX < 30) {
+          mouseNowX = 0
+        }
+
+        if (mouseNowX > window.innerWidth - targetElem.offsetWidth - 30) {
+          mouseNowX = window.innerWidth - targetElem.offsetWidth
+        }
+        if (mouseNowY < 30) {
+          mouseNowY = 0
+        }
+        if (mouseNowY > window.innerHeight - targetElem.offsetHeight - 30) {
+          mouseNowY = window.innerHeight - targetElem.offsetHeight
+        }
+
+        // console.log(mouseNowX, mouseNowY);
+
+        targetElem.style.left = mouseNowX + 'px'
+        targetElem.style.top = mouseNowY + 'px'
+      })
+    })
+  </script>
+  
+</body>
+</html>
