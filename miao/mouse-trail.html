@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    div {
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      background-color: lightblue;
+      text-align: center;  /* 文本居中 */
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div>一</div>
+  <div>二</div>
+  <div>三</div>
+
+  <script>
+    var angle = 0
+    var divs = document.querySelectorAll('div')
+    var mousePosX = -9999    
+    var mousePosY = -9999
+
+    document.addEventListener('mousemove', function move(moveEvent) {
+      mousePosX = moveEvent.clientX
+      mousePosY = moveEvent.clientY
+      // if (mousePosX >= 0) {  // 第二种写法：当鼠标在浏览器中时，运行动画
+      //   //  requestAnimationFrame
+      // }
+    })
+
+    requestAnimationFrame(function animate(time) {
+      angle = time * 0.01
+
+      for (var div of divs) {
+        var x1 = Math.cos(angle) * 100 + mousePosX
+        var y1 = Math.sin(angle) * 100 + mousePosY
+        div.style.left = x1 + 'px'
+        div.style.top = y1 + 'px'
+
+        angle += Math.PI * 2 / divs.length
+        console.log(div, divs);
+      }
+      requestAnimationFrame(animate)
+    })
+
+  </script>
+</body>
+</html>
