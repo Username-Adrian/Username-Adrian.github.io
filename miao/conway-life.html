@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Document</title>
+
+  <style>
+    input {
+      margin: 0.5px;
+    }
+    form {
+      height: 14px;
+    }
+    .lenWidth {
+      width: 100px;
+    }
+    .inputNumLay {
+      display: flex;
+      flex-direction: column;
+    }
+    .inputNum {
+      width: 220px;
+    }
+    .inputNumLay, .inputLayout {
+      display: flex;
+    }
+    .inputLaunch {
+      display: flex;
+      justify-content: flex-end;
+    }
+    
+  </style>
+
+</head>
+<body>
+  <div class="inputNumLay">
+    <div class="inputNum">
+      长宽：
+      <input class="lenWidth" type="text" placeholder="9（请输入正整数）"/>
+      <input class="check" type="button" value="确认" onclick="check()"/>
+    </div>
+    <div class="inputLayout">
+      <input class="defaultLay" type="button" value="默认布局" />
+      <input class="randLay" type="button" value="随机布局" />
+      <input class="clrLay" type="button" value="清除布局" />
+    </div>
+    <div class="inputLaunch">
+      <input class="runOne" type="button" value="运行一次" />
+      <input class="autoRun" type="button" value="自动运行" />
+      <input class="stop" type="button" value="暂停" />
+    </div>
+  </div>
+
+
+  <script>
+    class Conway {
+      constructor(x=15, y=15, randomLive=false) {
+        this.x = x
+        this.y = y
+        this.randomLive = randomLive
+        this.toBeOrNoToBe = this.toBeOrNoToBe.bind(this)
+        this.changeCellAlive = this.changeCellAlive.bind(this)
+        this.neighbors = this.neighbors.bind(this)
+      }
+
+      createEnvironment() {
+        for (var j = 0; j < this.y; j++) {
+          document.body.append(this.createForm());
+          for (var i = 0; i < this.x; i++) {
+            var forms = document.querySelectorAll("form");
+            if (this.randomLive) {
+              forms[j].append(this.createInput(this.checkCell()));
+            } else {
+              forms[j].append(this.createInput());
+            }
+          }
+        }
+      }
+
+      createInput(check = false) {
+        var input = document.createElement("input");
+        input.type = "checkbox";
+        if (check) {
+          input.setAttribute("checked", true);
+        }
+        return input;
+      }
+
+      createForm() {
+        var form = document.createElement("form");
+        return form;
+      }
+
+      checkCell() {
+        var flag = false;
+        var probability = Math.random();
+        if (probability >= 0.618) {
+          flag = true;
+        }
+        return flag;
+      }
+
+      toBeOrNoToBe() {
+        // 康威核心代码：生存还是死亡
+        var forms = document.forms;
+        var formsLen = forms.length;
+        var formX = forms[0].querySelectorAll("input").length; 
+
+        for (var m = 0; m < formsLen; m++) {
+          var form = forms[m];
+          var formAhead = forms[m - 1];
+          var formBack = forms[m + 1];
+          var formAheadNum = 0;
+          var formBackNum = 0;
+          for (var n = 0; n < formX; n++) {
+            var cellAliveNum = 0; 
+            var cellAliveBefore = form[n].checked; 
+            
+            if (form[n].checked) {
+              cellAliveNum +=
+                this.neighbors(form, n, cellAliveNum) +
+                this.neighbors(formAhead, n, cellAliveNum) +
+                this.neighbors(formBack, n, cellAliveNum) -
+                1;
+            } else {
+              cellAliveNum +=
+                this.neighbors(form, n, cellAliveNum) +
+                this.neighbors(formAhead, n, cellAliveNum) +
+                this.neighbors(formBack, n, cellAliveNum);
+            }
+            this.changeCellAlive(form, n, cellAliveNum);
+
+          }
+        }
+      }
+
+      changeCellAlive(form, n, cellAliveNum) {
+        var cellAlive = form[n].checked;
+        var cellTimerId
+        if (cellAliveNum === 3 && cellAlive == false) {
+          setTimeout(function () {
+            form[n].checked = true
+          });
+        } else if (cellAlive == true && (cellAliveNum < 2 || cellAliveNum > 3)){
+          setTimeout(function () {
+              form[n].checked = false
+          });
+        }
+      }
+
+      neighbors(form, n, cellAliveNum) {
+        if (form == undefined) {
+          return cellAliveNum;
+        }
+        var input = form[n];
+        if (input) {
+          if (input.checked) {
+            cellAliveNum++;
+          }
+        }
+        input = form[n - 1];
+        if (input) {
+          if (input.checked) {
+            cellAliveNum++;
+          }
+        }
+        input = form[n + 1];
+        if (input) {
+          if (input.checked) {
+            cellAliveNum++;
+          }
+        }
+
+        return cellAliveNum;
+      }
+    }
+
+
+    var god
+    var timerId
+
+    document.querySelector('.randLay').addEventListener('click', function () { 
+      clearTimeout(timerId) 
+      removeEnviroment()
+      god.createEnvironment()
+    })
+
+    document.querySelector('.runOne').addEventListener('click', function () { 
+      god.toBeOrNoToBe()
+    })
+
+    document.querySelector('.autoRun').addEventListener('click', function () {  
+      clearTimeout(timerId)  
+      setTimeout(timerId = setInterval(god.toBeOrNoToBe, 250))
+    })
+
+    document.querySelector('.stop').addEventListener('click', function () {  // 
+      clearTimeout(timerId)
+    })
+
+    document.querySelector('.clrLay').addEventListener('click', clearLay)
+
+    document.querySelector('.defaultLay').addEventListener('click', arrayToButt)
+
+    function check() {
+      removeEnviroment()
+      var inputValue = parseFloat(document.querySelector('.lenWidth').value)
+      // 下面 randomLive=true 不然在 随机布局函数中 randomLive=false 会无法随机
+      god = new Conway(inputValue, inputValue, true)  
+      god.createEnvironment()
+      clearLay()
+      formWidth()
+    }
+
+
+    function removeEnviroment() {
+      if (document.forms) {  // 创建环境前，先删除原有环境
+        for (var i = 0; i < document.forms.length;) {
+          document.forms[i].remove()
+        }
+      }
+    }
+
+    function clearLay() {  // 将所有 input 元素内的 checked 变成false
+      clearTimeout(timerId)
+      var forms = document.forms
+      var formsLen = document.forms.length
+      for (var i = 0; i < formsLen;i++) {
+        var form = forms[i]
+        var inputLen = form.length
+        for (var j = 0; j < inputLen; j++) {
+          form.elements[j].checked = false
+        }
+      }
+    }
+
+    function formWidth() {  // 将 form 宽度设置为一定，按钮设为和 form 宽度一样。
+      var form = document.querySelectorAll('form')
+      var formLen = form.length
+      if (form) {
+        var inputLen = form[0].length
+        for (var i = 0; i < formLen; i++) {
+          form[i].style.width = inputLen * 14 + 'px'
+        }
+      }
+      var inputLaunch = document.querySelector('.inputLaunch')
+      if (inputLen * 13 > 210) {
+        inputLaunch.style.width = inputLen * 14 + 'px'
+      } else {
+        inputLaunch.style.width = '210px'
+      }
+      
+    }
+
+    function arrayToButt() {
+      removeEnviroment()
+      god = new Conway(40, 20, true)  
+      god.createEnvironment()
+      var arrayLen = gliderArray.length  // 方格的长宽一样
+      var forms = document.forms
+      var formsLen = forms.length
+
+      for (var i = 0; i < formsLen;i++) {
+        var form = forms[i]
+        var formLen = form.length
+        var array = gliderArray[i]
+        for (var j = 0; j < formLen; j++) {
+          var elem = array[j]
+          if (elem == 1) {
+            form.elements[j].checked = true
+          }
+          if (elem == 0) {
+            form.elements[j].checked = false
+          }
+        }
+      }
+
+      formWidth()
+    }
+
+    // 滑翔机模板
+    var gliderArray = [
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,1,1,0,0,1,1,0,1,0,0,0,1,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,1,1,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,],
+      [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,]
+    ]
+
+    arrayToButt()
+  </script>
+</body>
+</html>
